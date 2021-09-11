@@ -1,0 +1,82 @@
+type User @model {
+	id: ID!
+	name: String!
+	email: String!
+	profilePic: String
+	birthday: String
+	settings: [Int]
+
+	#relations
+	chatRoomUser: [ChatRoomUser] @connection(keyName: "byUser", fields: ["id"])
+	notifications: [Notification] @connection(keyName: "notificationsByUser", fields: ["id"])
+
+	#Many to Many
+	requestedMatches: [Match] @connection(keyName: "matchRequester", fields: ["id"])
+	receivedMatchRequests: [Match] @connection(keyName: "matchRequestee", fields: ["id"])
+	blockedUsers: [Block] @connection(keyName: "blocker", fields: ["id"])
+	blockedByUsers: [Block] @connection(keyName: "blockedUser", fields: ["id"])
+}
+
+type ChatRoomUser @model @key(name: "byUser", fields: ["userID", "chatRoomID"]) @key(name: "byChatRoom", fields: ["chatRoomID", "userID"]) {
+	id: ID!
+	userID: ID!
+	chatRoomID: ID!
+	user: User @connection(fields: ["userID"])
+	chatRoom: ChatRoom @connection(fields: ["chatRoomID"])
+}
+
+type ChatRoom @model {
+	id: ID!
+	chatRoomUsers: [ChatRoomUser] @connection(keyName: "byChatRoom", fields: ["id"])
+	messages: [Message] @connection(keyName: "byChatRoom", fields: ["id"])
+	lastMessageID: ID!
+	lastMessage: Message @connection(fields: ["lastMessageID"])
+}
+
+type Message @model @key(name: "byChatRoom", fields: ["chatRoomID", "createdAt"], queryField: "messagesByChatRoom") {
+	id: ID!
+	createdAt: String!
+	content: String!
+	userID: ID!
+	chatRoomID: ID!
+	user: User @connection(fields: ["userID"])
+	chatRoom: ChatRoom @connection(fields: ["chatRoomID"])
+}
+
+type Notification @model @key(name: "notificationsByUser", fields: ["userID"]) {
+	id: ID!
+	content: String!
+	userID: ID!
+	otherUserID: ID!
+	seen: String
+	clicked: String
+	user: User @connection(fields: ["userID"])
+	otherUser: User @connection(fields: ["otherUserID"])
+}
+
+################
+# Joiner types #
+################
+
+type Match
+	@model(queries: null)
+	@key(name: "matchRequester", fields: ["requesterID", "requesteeID"])
+	@key(name: "matchRequestee", fields: ["requesteeID", "requesterID"]) {
+	id: ID!
+	requesterID: ID!
+	requesteeID: ID!
+	requester: User! @connection(fields: ["requesterID"])
+	requestee: User! @connection(fields: ["requesteeID"])
+	status: String!
+}
+
+type Block
+	@model(queries: null)
+	@key(name: "blocker", fields: ["blockerID", "blockedUserID"])
+	@key(name: "blockedUser", fields: ["blockedUserID", "blockerID"]) {
+	id: ID!
+	blockerID: ID!
+	blockedUserID: ID!
+	blocker: User! @connection(fields: ["blockerID"])
+	blockedUser: User! @connection(fields: ["blockedUserID"])
+}

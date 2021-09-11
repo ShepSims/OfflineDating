@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-offlinedating-dev-00325-authRole",
+      "UnauthRoleArn": "arn:aws:iam::891725193857:role/amplify-offlinedating-dev-00325-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::891725193857:role/amplify-offlinedating-dev-00325-authRole",
+      "Region": "us-west-2",
+      "DeploymentBucketName": "amplify-offlinedating-dev-00325-deployment",
+      "UnauthRoleName": "amplify-offlinedating-dev-00325-unauthRole",
+      "StackName": "amplify-offlinedating-dev-00325",
+      "StackId": "arn:aws:cloudformation:us-west-2:891725193857:stack/amplify-offlinedating-dev-00325/5e659000-12ce-11ec-b11e-0673848c4259",
+      "AmplifyAppId": "dbn4ja40jupr9"
+    },
+    "categories": {
+      "auth": {
+        "offlinedatinge79ea549": {}
+      }
+    }
+  }
+}
