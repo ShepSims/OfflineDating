@@ -28,7 +28,7 @@ function MatchSquare({ name, profilePic, phone }) {
 						{ cancelable: false }
 					);
 				} else {
-					return Linking.openURL(appUrl);
+					return Linking.openURL(openLink);
 				}
 			})
 			.catch((err) => {
@@ -48,13 +48,10 @@ function MatchSquare({ name, profilePic, phone }) {
 					{tapped == true ? (
 						phone ? (
 							<View style={styles.infoContainerPressed}>
-								<TouchableOpacity style={styles.instagram} onPress={() => Linking.openURL('http://instagram.com/_u/shep_sims')}>
-									<Text style={styles.buttonText}> {'instagram - ' + '@shep.io'}</Text>
+								<TouchableOpacity style={styles.instagram} onPress={() => Linking.openURL('instagram://user?username=shep_sims')}>
+									<Text style={styles.buttonText}> {'instagram - ' + '@shep_sims'}</Text>
 								</TouchableOpacity>
-								<TouchableOpacity
-									style={styles.phoneButton}
-									onPress={() => Linking.openURL('sms:&addresses=3049821999&body=My sms text')}
-								>
+								<TouchableOpacity style={styles.phoneButton} onPress={() => openLink('sms:&addresses=3049821999&body=My sms text')}>
 									<Text style={styles.buttonText}> {'phone - ' + phone}</Text>
 								</TouchableOpacity>
 								<View style={styles.textInput} />
