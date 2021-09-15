@@ -81,17 +81,25 @@ const Menu = createDrawerNavigator();
 
 function CustomDrawerContent({ navigation, styles, theme }) {
 	return (
-		<View>
+		<View styles={{ backgroundColor: 'black' }}>
 			<TouchableOpacity style={styles.menuBtn} onPress={() => navigation.toggleDrawer()}></TouchableOpacity>
-			<View style={{ height: screenHeight * 0.15 }} />
-			<DrawerItem label={'Match'} labelStyle={styles.drawerItem} onPress={() => navigation.navigate('Match', { params: { theme: theme } })} />
+			<View style={{ height: screenHeight * 0.15, backgroundColor: 'black' }} />
 			<DrawerItem
+				inactiveBackgroundColor={'black'}
+				label={'Match'}
+				labelStyle={styles.drawerItem}
+				onPress={() => navigation.navigate('Match', { params: { theme: theme } })}
+			/>
+			<DrawerItem
+				inactiveBackgroundColor={'black'}
+				styles={{ backgroundColor: 'black' }}
 				label={'Matches'}
 				labelStyle={styles.drawerItem}
 				onPress={() => navigation.navigate('Matches', { params: { theme: theme } })}
 			/>
 
 			<DrawerItem
+				inactiveBackgroundColor={'black'}
 				label={'Logout'}
 				labelStyle={styles.drawerItem}
 				onPress={() => {
@@ -114,6 +122,7 @@ const MenuScreens = ({ styles, theme }) => (
 	<Menu.Navigator
 		drawerType={'front'}
 		drawerStyle={styles.drawerStyles}
+		drawerBackgroundColor={'black'}
 		drawerContent={(props) => <CustomDrawerContent {...props} styles={styles} theme={theme} />}
 	>
 		<Menu.Screen theme={theme} name={'Match'} params={{ theme: theme }} component={Match} options={{ gestureEnabled: true }} />
@@ -136,13 +145,15 @@ const App = () => {
 function useTheme(theme) {
 	const styles = StyleSheet.create({
 		drawerItem: {
-			color: theme.colors.text,
+			color: theme.colors.white,
+			backgroundColor: 'black',
 			fontSize: 30,
 		},
 		drawerStyles: {
-			borderTopRightRadius: 50,
+			borderTopRightRadius: 1,
 			borderBottomRightRadius: 50,
-			backgroundColor: theme.colors.background,
+			backgroundColor: 'black',
+			width: '3330%',
 		},
 		menuBtn: {
 			width: 45,

@@ -160,7 +160,7 @@ function useTheme() {
 			zIndex: 0,
 			alignItems: 'center',
 			justifyContent: 'center',
-			backgroundColor: '#FFFFFF',
+			backgroundColor: '#000000',
 			paddingTop: '2%',
 			paddingBottom: '5%',
 			alignItems: 'center',

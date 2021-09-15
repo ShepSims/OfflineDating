@@ -86,17 +86,15 @@ function MatchSquare({ name, profilePic, phone }) {
 
 const styles = StyleSheet.create({
 	container: {
-		paddingHorizontal: '5%',
-		paddingVertical: '5%',
-		shadowRadius: 2,
+		paddingHorizontal: 5,
+		paddingVertical: 2,
 		shadowOffset: { width: 0, height: 2 },
 		shadowColor: '#000000',
 		shadowOpacity: 0.5,
 	},
 	img: {
-		width: screenWidth / 2.4,
-		height: screenHeight / 3.5,
-		borderRadius: 25,
+		width: screenWidth / 2.1,
+		height: screenHeight / 3.4,
 		alignItems: 'center',
 		justifyContent: 'flex-end',
 	},
@@ -106,8 +104,6 @@ const styles = StyleSheet.create({
 		width: '100%',
 		height: 45,
 		backgroundColor: 'rgba(0, 0, 0,0.45)',
-		borderBottomRightRadius: 25,
-		borderBottomLeftRadius: 25,
 	},
 	infoContainerPressed: {
 		flexDirection: 'column',
@@ -115,10 +111,6 @@ const styles = StyleSheet.create({
 		width: '100%',
 		height: '100%',
 		backgroundColor: 'rgba(0, 0, 0,0.45)',
-		borderBottomRightRadius: 25,
-		borderBottomLeftRadius: 25,
-		borderTopLeftRadius: 25,
-		borderTopRightRadius: 25,
 	},
 	text: {
 		flexDirection: 'row',
