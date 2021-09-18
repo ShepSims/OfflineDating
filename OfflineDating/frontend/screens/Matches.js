@@ -136,7 +136,7 @@ function useTheme() {
 			zIndex: 0,
 			alignItems: 'center',
 			justifyContent: 'center',
-			backgroundColor: '#FFFFFF',
+			backgroundColor: 'black',
 			paddingTop: '2%',
 			paddingBottom: '5%',
 			alignItems: 'center',
