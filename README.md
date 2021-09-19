@@ -1,6 +1,6 @@
 # OfflineDating
 
-Mock up of a tinder clone 
+Mock up of a minimalistic tinder clone 
 
 
 
