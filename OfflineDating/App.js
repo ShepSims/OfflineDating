@@ -14,6 +14,8 @@ import Amplify from 'aws-amplify';
 import awsmobile from './src/aws-exports';
 import Match from './frontend/screens/Match';
 import Matches from './frontend/screens/Matches';
+import Events from './frontend/screens/EventPage';
+
 import { midnight } from './assets/themes';
 
 const screenHeight = Math.round(Dimensions.get('window').height); // Gets the height of the device's screen
@@ -105,6 +107,13 @@ function CustomDrawerContent({ navigation, styles, theme }) {
 				labelStyle={styles.drawerItem}
 				onPress={() => navigation.navigate('Matches', { params: { theme: theme } })}
 			/>
+			<DrawerItem
+				inactiveBackgroundColor={'black'}
+				styles={{ backgroundColor: 'black' }}
+				label={'Events'}
+				labelStyle={styles.drawerItem}
+				onPress={() => navigation.navigate('Events', { params: { theme: theme } })}
+			/>
 
 			<DrawerItem
 				inactiveBackgroundColor={'black'}
@@ -135,6 +144,7 @@ const MenuScreens = ({ styles, theme }) => (
 	>
 		<Menu.Screen theme={theme} name={'Match'} params={{ theme: theme }} component={Match} options={{ gestureEnabled: true }} />
 		<Menu.Screen theme={theme} name={'Matches'} params={{ theme: theme }} component={Matches} options={{ gestureEnabled: true }} />
+		<Menu.Screen theme={theme} name={'Events'} params={{ theme: theme }} component={Events} options={{ gestureEnabled: true }} />
 	</Menu.Navigator>
 );
 const App = () => {
