@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { View, Image, Text, FlatList, Dimensions, StyleSheet } from 'react-native';
+import { View, Image, Text, FlatList, Dimensions, StyleSheet, TouchableOpacity } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import moment from 'moment';
+import { midnight } from '../../assets/themes';
 
 const screenHeight = Math.round(Dimensions.get('window').height);
 const screenWidth = Math.round(Dimensions.get('window').width);
@@ -11,6 +12,7 @@ function EventPage() {
 	const navigation = useNavigation();
 
 	// Theme
+	const theme = midnight;
 	const styles = useTheme();
 
 	// Variables
@@ -20,33 +22,35 @@ function EventPage() {
 
 	const renderEvent = ({ item }) => (
 		<View style={{ borderColor: 'white', borderWidth: 2, margin: 10 }}>
-			<Image source={{ uri: item.coverPhoto }} style={styles.img} />
-
-			<View style={{ paddingTop: 15, paddingBottom: 30, borderColor: 'white' }}>
-				<Text style={styles.title}>{item.title}</Text>
-				<View style={[styles.info, { width: screenWidth * 0.9 }]}>
-					<Text style={styles.normalText}>{item.description}</Text>
-				</View>
-
-				<View style={[styles.info, { width: screenWidth * 0.9 }]}>
-					<Text style={styles.normalText}>{item.location}</Text>
-				</View>
-
-				<View style={styles.dateTime}>
-					<View style={styles.info}>
-						<Text style={styles.boldText}>{item.date}</Text>
+			<TouchableOpacity onPress={() => navigation.navigate('Match', { params: { theme: theme, event: item.id } })}>
+				<Image source={{ uri: item.coverPhoto }} style={styles.img} />
+				<View style={{ paddingTop: 15, paddingBottom: 30, borderColor: 'white' }}>
+					<Text style={styles.title}>{item.title}</Text>
+					<View style={[styles.info, { width: screenWidth * 0.9 }]}>
+						<Text style={styles.normalText}>{item.description}</Text>
 					</View>
 
-					<View style={styles.info}>
-						<Text style={styles.boldText}>{item.time}</Text>
+					<View style={[styles.info, { width: screenWidth * 0.9 }]}>
+						<Text style={styles.normalText}>{item.location}</Text>
+					</View>
+
+					<View style={styles.dateTime}>
+						<View style={styles.info}>
+							<Text style={styles.boldText}>{item.date}</Text>
+						</View>
+
+						<View style={styles.info}>
+							<Text style={styles.boldText}>{item.time}</Text>
+						</View>
 					</View>
 				</View>
-			</View>
+			</TouchableOpacity>
 		</View>
 	);
 	useEffect(() => {
 		setData([
 			{
+				id: 0,
 				ref: 0,
 				title: 'Get HIIT on',
 				description: 'Come get hiit on by the hottest singles in your area',
@@ -57,11 +61,12 @@ function EventPage() {
 					'https://kajabi-storefronts-production.global.ssl.fastly.net/kajabi-storefronts-production/blogs/3762/images/DUDfOeTOqk6vh7L84WGw_group_fitness.jpg',
 			},
 			{
+				id: 1,
 				ref: 1,
 				title: 'Tramigo #001',
 				description: 'The first Tramigo x Offline Dating collab',
-				date: moment(new Date(Date.now())).format('MMM Do, YYYY'),
-				time: moment(new Date(Date.now())).format('hh:mm A'),
+				date: moment(new Date(Date.now() + 1000000000)).format('MMM Do, YYYY'),
+				time: moment(new Date(Date.now() + 1000000000)).format('hh:mm A'),
 				location: 'Sheps house',
 				coverPhoto: 'https://www.dmarge.com/wp-content/uploads/2021/01/dwayne-the-rock-.jpg',
 			},
