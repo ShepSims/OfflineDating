@@ -1,0 +1,5 @@
+export const STORE_USERS = 'STORE_USERS';
+export const STORE_EVENTS = 'STORE_EVENTS';
+export const EDIT_PROFILE = 'EDIT_PROFILE';
+export const STORE_CURRENT_USER = 'STORE_CURRENT_USER';
+export const UPDATE_USER = 'UPDATE_USER';

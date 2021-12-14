@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { View, Image, Text, FlatList, Dimensions, StyleSheet, TouchableOpacity } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
+import { useSelector } from 'react-redux';
 import moment from 'moment';
 import { midnight } from '../../assets/themes';
 
@@ -10,6 +11,7 @@ const screenWidth = Math.round(Dimensions.get('window').width);
 function EventPage() {
 	// Navigation
 	const navigation = useNavigation();
+	const events = useSelector((state) => state.events);
 
 	// Theme
 	const theme = midnight;
@@ -30,10 +32,6 @@ function EventPage() {
 						<Text style={styles.normalText}>{item.description}</Text>
 					</View>
 
-					<View style={[styles.info, { width: screenWidth * 0.9 }]}>
-						<Text style={styles.normalText}>{item.location}</Text>
-					</View>
-
 					<View style={styles.dateTime}>
 						<View style={styles.info}>
 							<Text style={styles.boldText}>{item.date}</Text>
@@ -43,34 +41,15 @@ function EventPage() {
 							<Text style={styles.boldText}>{item.time}</Text>
 						</View>
 					</View>
+					<View style={[styles.info, { width: screenWidth * 0.9 }]}>
+						<Text style={styles.normalText}>at {item.location}</Text>
+					</View>
 				</View>
 			</TouchableOpacity>
 		</View>
 	);
 	useEffect(() => {
-		setData([
-			{
-				id: 0,
-				ref: 0,
-				title: 'Get HIIT on',
-				description: 'Come get hiit on by the hottest singles in your area',
-				date: moment(new Date(Date.now())).format('MMM Do, YYYY'),
-				time: moment(new Date(Date.now())).format('hh:mm A'),
-				location: 'PB Gym',
-				coverPhoto:
-					'https://kajabi-storefronts-production.global.ssl.fastly.net/kajabi-storefronts-production/blogs/3762/images/DUDfOeTOqk6vh7L84WGw_group_fitness.jpg',
-			},
-			{
-				id: 1,
-				ref: 1,
-				title: 'Tramigo #001',
-				description: 'The first Tramigo x Offline Dating collab',
-				date: moment(new Date(Date.now() + 1000000000)).format('MMM Do, YYYY'),
-				time: moment(new Date(Date.now() + 1000000000)).format('hh:mm A'),
-				location: 'Sheps house',
-				coverPhoto: 'https://www.dmarge.com/wp-content/uploads/2021/01/dwayne-the-rock-.jpg',
-			},
-		]);
+		setData(Object.values(events));
 	}, []);
 
 	return (
@@ -98,6 +77,7 @@ function useTheme() {
 			flexDirection: 'row',
 			justifyContent: 'flex-start',
 			alignItems: 'center',
+			paddingTop: 40,
 		},
 		header: {},
 		img: {
@@ -106,7 +86,6 @@ function useTheme() {
 		},
 		info: {
 			fontWeight: 'bold',
-			padding: 5,
 			flexDirection: 'row',
 			alignItems: 'center',
 		},
@@ -120,7 +99,7 @@ function useTheme() {
 		normalText: {
 			fontSize: 17,
 			color: 'white',
-			textAlign: 'left',
+			textAlign: 'center',
 			marginLeft: 10,
 		},
 		scroll: {
