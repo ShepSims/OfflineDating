@@ -1,8 +1,8 @@
 # OfflineDating
 
-Mock up of a minimalistic tinder clone 
+Concept / Prototyping for San Diego Startup Offline Dating  
 
 
 
-https://user-images.githubusercontent.com/28160617/133940834-09968524-a223-4a2b-b552-b0a4f16a370a.mov
+https://user-images.githubusercontent.com/28160617/145987794-fc05ebd7-390e-4bb2-9c12-85d0f6295b06.mov
 
