@@ -14,6 +14,7 @@ import Amplify from 'aws-amplify';
 import awsmobile from './src/aws-exports';
 import Match from './frontend/screens/Match';
 import Matches from './frontend/screens/Matches';
+import ProfileScreen from './frontend/screens/ProfileScreen';
 import Events from './frontend/screens/EventPage';
 
 import { midnight } from './assets/themes';
@@ -93,13 +94,7 @@ function CustomDrawerContent({ navigation, styles, theme }) {
 			</View>
 			<View height={'5%'} />
 			<Text style={{ color: '#f9f9f9', marginTop: '3%', position: 'relative', textAlign: 'center' }}>{'Hi, Shep!'}</Text>
-			<View height={'25%'} />
-			<DrawerItem
-				inactiveBackgroundColor={'black'}
-				label={'Match'}
-				labelStyle={styles.drawerItem}
-				onPress={() => navigation.navigate('Match', { params: { theme: theme } })}
-			/>
+			<View height={'15%'} />
 			<DrawerItem
 				inactiveBackgroundColor={'black'}
 				styles={{ backgroundColor: 'black' }}
@@ -113,6 +108,13 @@ function CustomDrawerContent({ navigation, styles, theme }) {
 				label={'Events'}
 				labelStyle={styles.drawerItem}
 				onPress={() => navigation.navigate('Events', { params: { theme: theme } })}
+			/>
+			<DrawerItem
+				inactiveBackgroundColor={'black'}
+				styles={{ backgroundColor: 'black' }}
+				label={'Edit Profile'}
+				labelStyle={styles.drawerItem}
+				onPress={() => navigation.navigate('Profile', { params: { theme: theme } })}
 			/>
 
 			<DrawerItem
@@ -145,6 +147,7 @@ const MenuScreens = ({ styles, theme }) => (
 		<Menu.Screen theme={theme} name={'Match'} params={{ theme: theme }} component={Match} options={{ gestureEnabled: true }} />
 		<Menu.Screen theme={theme} name={'Matches'} params={{ theme: theme }} component={Matches} options={{ gestureEnabled: true }} />
 		<Menu.Screen theme={theme} name={'Events'} params={{ theme: theme }} component={Events} options={{ gestureEnabled: true }} />
+		<Menu.Screen theme={theme} name={'Profile'} params={{ theme: theme }} component={ProfileScreen} options={{ gestureEnabled: true }} />
 	</Menu.Navigator>
 );
 const App = () => {
