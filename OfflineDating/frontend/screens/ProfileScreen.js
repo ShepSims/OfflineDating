@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { View, StyleSheet, Dimensions, FlatList, TouchableOpacity, Text, ImageBackground, RefreshControl } from 'react-native';
+import { TextInput, View, StyleSheet, Dimensions, FlatList, TouchableOpacity, Text, ImageBackground, RefreshControl } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import MatchSquare from '../components/MatchSquare';
 import * as ImagePicker from 'expo-image-picker';
@@ -17,8 +17,8 @@ const lastName = 'Sims';
 function ProfileScreen() {
 	const [profilePic, setProfilePic] = useState({ uri: 'https://www.dmarge.com/wp-content/uploads/2021/01/dwayne-the-rock-.jpg' });
 
-	const [instagram, setInstagram] = useState('shep_sims');
-	const [phone, setPhone] = useState(3049821999);
+	const [instagram, setInstagram] = useState('@shep_sims');
+	const [phone, setPhone] = useState('3049821999');
 
 	const navigation = useNavigation();
 
@@ -43,17 +43,15 @@ function ProfileScreen() {
 		<View style={styles.container}>
 			<ImageBackground source={profilePic} style={styles.img} imageStyle={styles.img}>
 				<View style={styles.infoContainerPressed}>
-					<TouchableOpacity style={styles.instagram} onPress={() => Linking.openURL('instagram://user?username=shep_sims')}>
-						<Text style={styles.buttonText}> {'instagram - ' + '@shep_sims'}</Text>
-					</TouchableOpacity>
-					<TouchableOpacity style={styles.phoneButton} onPress={() => openLink('sms:&addresses=3049821999&body=My sms text')}>
-						<Text style={styles.buttonText}> {'phone - ' + phone}</Text>
-					</TouchableOpacity>
+					<Text style={styles.instagramText}>Instagram</Text>
+					<TextInput style={styles.buttonText} onChangeText={setInstagram} value={instagram} placeholder='@shep_sims' />
+					<Text style={styles.phoneText}>Phone</Text>
+					<TextInput style={styles.phoneButton} onChangeText={setPhone} value={phone} placeholder='3049821999' keyboardType='numeric' />
 					<View style={styles.blackLine} />
-					<TouchableOpacity style={styles.dismissButton} onPress={() => pickImage()}>
-						<Text style={styles.buttonText}> Change Profile Picture</Text>
-					</TouchableOpacity>
 				</View>
+				<TouchableOpacity style={styles.dismissButton} onPress={() => pickImage()}>
+					<Text style={styles.normalText}> Change Profile Picture</Text>
+				</TouchableOpacity>
 			</ImageBackground>
 			<Text style={styles.name}>{firstName + ' ' + lastName}</Text>
 		</View>
@@ -126,8 +124,15 @@ function useTheme() {
 			color: '#F0FFFF',
 			top: '20%',
 		},
+		instagramText: {
+			position: 'absolute',
+			color: '#F0FFFF',
+			top: '16%',
+		},
 		dismissButton: {
 			flexDirection: 'column',
+			justifyContent: 'center',
+			alignContent: 'center',
 			position: 'absolute',
 			color: '#000000',
 			bottom: '25%',
@@ -142,14 +147,25 @@ function useTheme() {
 			color: '#F0FFFF',
 		},
 		buttonText: {
-			fontSize: 18,
+			position: 'absolute',
 			color: '#F0FFFF',
+			top: '20%',
 		},
 		phoneButton: {
 			position: 'absolute',
 			color: '#F0FFFF',
 			height: 100,
 			top: '28%',
+		},
+		phoneText: {
+			position: 'absolute',
+			color: '#F0FFFF',
+			height: 100,
+			top: '32%',
+		},
+		normalText: {
+			color: 'white',
+			fontSize: 15,
 		},
 	});
 
