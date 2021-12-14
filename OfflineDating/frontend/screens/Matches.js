@@ -15,6 +15,7 @@ function Matches() {
 			userId: '1',
 			firstName: 'Ellen',
 			lastName: 'Mustafa',
+			instagram: 'mustafa',
 			profilePic: {
 				uri: 'https://www.bkacontent.com/wp-content/uploads/2020/10/Depositphotos_336730000_l-2015.jpg',
 			},
@@ -24,6 +25,7 @@ function Matches() {
 			userId: '2',
 			firstName: 'Dwayne',
 			lastName: 'Johnson',
+			instagram: 'therock',
 			profilePic: {
 				uri: 'https://www.dmarge.com/wp-content/uploads/2021/01/dwayne-the-rock-.jpg',
 			},
@@ -33,6 +35,7 @@ function Matches() {
 			userId: '3',
 			firstName: 'Becky',
 			lastName: 'McTwist',
+			instagram: 'mctwisty',
 			profilePic: {
 				uri: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cmFuZG9tJTIwcGVyc29ufGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80',
 			},
@@ -42,6 +45,7 @@ function Matches() {
 			userId: '4',
 			firstName: 'Haley',
 			lastName: 'Umpquat',
+			instagram: 'umpquath',
 			profilePic: {
 				uri: 'https://hope1032.com.au/wp-content/uploads/2019/10/Waiting-for-friends-1200-x-480.png',
 			},
@@ -61,11 +65,18 @@ function Matches() {
 	const styles = useTheme();
 
 	const onRefresh = useCallback(() => {
-		includeData(meetList);
+		includeData(TESTDATA);
 	}, []);
 
 	const renderSquares = ({ item }) => (
-		<MatchSquare key={item.ref} profilePic={item.profilePic} name={item.name} tapped={item.tapped} phone={item.phone} />
+		<MatchSquare
+			key={item.ref}
+			profilePic={item.profilePic}
+			instagram={item.instagram}
+			name={item.name}
+			tapped={item.tapped}
+			phone={item.phone}
+		/>
 	);
 
 	function includeData(data) {
@@ -75,32 +86,26 @@ function Matches() {
 		for (let i = 0; i < data.length; i++) {
 			const user = data[i];
 			try {
-				console.log(i);
-				let name = data[i]['firstName'] + ' ' + data[i]['lastName'];
-				let pfp = data[i]['profilePic'];
-				let phone = data[i]['phone'];
 				let userData = {
 					ref: i,
 					userId: user.userId,
-					name: name,
-					profilePic: pfp,
+					name: data[i]['firstName'] + ' ' + data[i]['lastName'],
+					profilePic: data[i]['profilePic'],
+					instagram: data[i]['instagram'],
 					tapped: false,
-					phone: phone,
+					phone: data[i]['phone'],
 				};
 				users.push(userData);
-				console.log('pushing', user);
 			} catch (err) {
 				console.log('error in include data for meet', err);
 				continue;
 			}
 		}
-		console.log('setting', users.length);
 		setSearchProfilesList(users);
 	}
 
 	useEffect(() => {
 		includeData(matchList);
-		console.log(matchList);
 		console.log('Meet loaded', searchProfilesList.length, ' unique profiles!');
 	}, []);
 

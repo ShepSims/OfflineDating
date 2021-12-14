@@ -10,7 +10,7 @@ const screenHeight = Math.round(Dimensions.get('window').height);
  * @param props userId, firstName, lastName, profile
  * @returns Component that renders a rounded square consisting of a picture, name, of origin
  */
-function MatchSquare({ name, profilePic, phone }) {
+function MatchSquare({ name, profilePic, phone, instagram }) {
 	const navigation = useNavigation();
 	const [tapped, setTapped] = useState(false);
 	const [matched, setMatched] = useState(false);
@@ -49,7 +49,7 @@ function MatchSquare({ name, profilePic, phone }) {
 						phone ? (
 							<View style={styles.infoContainerPressed}>
 								<TouchableOpacity style={styles.instagram} onPress={() => Linking.openURL('instagram://user?username=shep_sims')}>
-									<Text style={styles.buttonText}> {'instagram - ' + '@shep_sims'}</Text>
+									<Text style={styles.buttonText}> {'instagram - ' + '@' + instagram}</Text>
 								</TouchableOpacity>
 								<TouchableOpacity style={styles.phoneButton} onPress={() => openLink('sms:&addresses=3049821999&body=My sms text')}>
 									<Text style={styles.buttonText}> {'phone - ' + phone}</Text>
