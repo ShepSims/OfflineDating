@@ -144,21 +144,17 @@ const MenuScreens = ({ styles, theme }) => (
 		drawerBackgroundColor={'black'}
 		drawerContent={(props) => <CustomDrawerContent {...props} styles={styles} theme={theme} />}
 	>
+		<Menu.Screen theme={theme} name={'Events'} params={{ theme: theme }} component={Events} options={{ gestureEnabled: true }} />
 		<Menu.Screen theme={theme} name={'Match'} params={{ theme: theme }} component={Match} options={{ gestureEnabled: true }} />
 		<Menu.Screen theme={theme} name={'Matches'} params={{ theme: theme }} component={Matches} options={{ gestureEnabled: true }} />
-		<Menu.Screen theme={theme} name={'Events'} params={{ theme: theme }} component={Events} options={{ gestureEnabled: true }} />
 		<Menu.Screen theme={theme} name={'Profile'} params={{ theme: theme }} component={ProfileScreen} options={{ gestureEnabled: true }} />
 	</Menu.Navigator>
 );
 const App = () => {
 	const theme = midnight;
 	const styles = useTheme(theme);
-	console.log('\n\nstyles\n', styles);
-	console.log(styles);
 
-	useEffect(() => {
-		console.log('useEffect');
-	}, []);
+	useEffect(() => {}, []);
 
 	return MyStack(styles, theme);
 };
