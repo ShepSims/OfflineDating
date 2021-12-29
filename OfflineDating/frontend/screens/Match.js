@@ -2,7 +2,8 @@ import React, { useEffect, useState, useCallback } from 'react';
 import { View, StyleSheet, Dimensions, FlatList, RefreshControl } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import MatchSquare from '../components/MatchSquare';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { storeEvents } from '../../store/actions/eventActions';
 
 /**
  * @param *
@@ -17,17 +18,33 @@ function Match() {
 
 	const users = useSelector((state) => state.users);
 	const events = useSelector((state) => state.events);
+	const dispatch = useDispatch();
 
 	// Theme
 	const styles = useTheme();
 
-	const renderSquares = ({ item }) => <MatchSquare key={item.ref} profilePic={item.profilePic} name={item.name} tapped={item.tapped} />;
+	const renderSquares = ({ item }) => (
+		<MatchSquare
+			key={item.ref}
+			profilePic={item.profilePic}
+			name={item.name}
+			tapped={item.tapped}
+			onPressDismissed={() => {
+				let e = { ...events };
+				e[route.params.eventID].dismissed.push(item.userId);
+				dispatch(storeEvents(e));
+				includeData();
+			}}
+		/>
+	);
 
 	function includeData() {
 		let data = events[route.params.eventID].attendees;
 		for (let i in events[route.params.eventID].dismissed) {
-			let dismissedUserID = events[route.params.eventID].dismissed[i];
-			if (data.includes(dismissedUserID)) data.splice(data.indexOf(dismissedUserID), 1);
+			let dismissedUserID = parseInt(events[route.params.eventID].dismissed[i]);
+			if (data.includes(dismissedUserID)) {
+				data.splice(data.indexOf(dismissedUserID), 1);
+			}
 		}
 		let meetList = [];
 		// let i = 0;
