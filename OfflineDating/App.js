@@ -16,6 +16,7 @@ import Match from './frontend/screens/Match';
 import Matches from './frontend/screens/Matches';
 import ProfileScreen from './frontend/screens/ProfileScreen';
 import Events from './frontend/screens/EventPage';
+import EventDetails from './frontend/screens/EventDetails';
 
 import { midnight } from './assets/themes';
 
@@ -130,7 +131,6 @@ function CustomDrawerContent({ navigation, styles, theme }) {
 }
 
 function MyStack(styles, theme) {
-	console.log('here');
 	return (
 		<NavigationContainer theme={midnight}>
 			<MenuScreens styles={styles} theme={theme} />
@@ -145,6 +145,7 @@ const MenuScreens = ({ styles, theme }) => (
 		drawerContent={(props) => <CustomDrawerContent {...props} styles={styles} theme={theme} />}
 	>
 		<Menu.Screen theme={theme} name={'Events'} params={{ theme: theme }} component={Events} options={{ gestureEnabled: true }} />
+		<Menu.Screen theme={theme} name={'EventDetails'} params={{ theme: theme }} component={EventDetails} />
 		<Menu.Screen theme={theme} name={'Match'} params={{ theme: theme }} component={Match} options={{ gestureEnabled: true }} />
 		<Menu.Screen theme={theme} name={'Matches'} params={{ theme: theme }} component={Matches} options={{ gestureEnabled: true }} />
 		<Menu.Screen theme={theme} name={'Profile'} params={{ theme: theme }} component={ProfileScreen} options={{ gestureEnabled: true }} />

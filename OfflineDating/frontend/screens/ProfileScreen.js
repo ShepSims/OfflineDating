@@ -19,8 +19,14 @@ function ProfileScreen() {
 
 	const [instagram, setInstagram] = useState('@shep_sims');
 	const [phone, setPhone] = useState('3049821999');
+	const [name, setName] = useState('Shep Sims');
+	const [saved, setSaved] = useState(true);
 
 	const navigation = useNavigation();
+
+	useEffect(() => {
+		setSaved(false);
+	}, [name, phone, instagram]);
 
 	// Theme
 	const styles = useTheme();
@@ -41,6 +47,16 @@ function ProfileScreen() {
 
 	return (
 		<View style={styles.container}>
+			{!saved && (
+				<Text
+					style={styles.save}
+					onPress={() => {
+						setSaved(true);
+					}}
+				>
+					Save
+				</Text>
+			)}
 			<ImageBackground source={profilePic} style={styles.img} imageStyle={styles.img}>
 				<View style={styles.infoContainerPressed}>
 					<Text style={styles.instagramText}>Instagram</Text>
@@ -53,7 +69,7 @@ function ProfileScreen() {
 					<Text style={styles.normalText}> Change Profile Picture</Text>
 				</TouchableOpacity>
 			</ImageBackground>
-			<Text style={styles.name}>{firstName + ' ' + lastName}</Text>
+			<TextInput style={styles.name} onChangeText={setName} value={name} placeholder='Shep Sims' />
 		</View>
 	);
 }
@@ -118,6 +134,11 @@ function useTheme() {
 			color: 'white',
 			fontSize: 30,
 			padding: 25,
+		},
+		save: {
+			color: 'white',
+			fontSize: 15,
+			alignContent: 'flex-end',
 		},
 		instagram: {
 			position: 'absolute',

@@ -8,10 +8,12 @@ import { midnight } from '../../assets/themes';
 const screenHeight = Math.round(Dimensions.get('window').height);
 const screenWidth = Math.round(Dimensions.get('window').width);
 
-function EventPage() {
+function EventDetails() {
 	// Navigation
+	const route = useRoute();
 	const navigation = useNavigation();
 	const events = useSelector((state) => state.events);
+	const item = events[route.params.id];
 
 	// Theme
 	const theme = midnight;
@@ -22,46 +24,35 @@ function EventPage() {
 	const [data, setData] = useState([]);
 	// State
 
-	const renderEvent = ({ item }) => (
-		<View style={{ borderColor: 'white', borderWidth: 2, margin: 10 }}>
-			<TouchableOpacity onPress={() => navigation.navigate('EventDetails', { theme: theme, id: item.id })}>
-				<Image source={{ uri: item.coverPhoto }} style={styles.img} />
-				<View style={{ paddingTop: 15, paddingBottom: 30, borderColor: 'white' }}>
-					<Text style={styles.title}>{item.title}</Text>
-					<View style={[styles.info, { width: screenWidth * 0.9 }]}>
-						<Text style={styles.normalText}>{item.description}</Text>
-					</View>
-
-					<View style={styles.dateTime}>
-						<View style={styles.info}>
-							<Text style={styles.boldText}>{item.date}</Text>
-						</View>
-
-						<View style={styles.info}>
-							<Text style={styles.boldText}>{item.time}</Text>
-						</View>
-					</View>
-					<View style={[styles.info, { width: screenWidth * 0.9 }]}>
-						<Text style={styles.normalText}>at {item.location}</Text>
-					</View>
-				</View>
-			</TouchableOpacity>
-		</View>
-	);
 	useEffect(() => {
 		setData(Object.values(events));
 	}, []);
 
 	return (
 		<View style={styles.container}>
-			<FlatList
-				data={data}
-				renderItem={renderEvent}
-				keyExtractor={(event) => event.ref.toString()}
-				contentContainerStyle={styles.scroll}
-				showsHorizontalScrollIndicator={false}
-				showsVerticalScrollIndicator={false}
-			/>
+			<Image source={{ uri: item.coverPhoto }} style={styles.img} />
+			<View style={{ paddingTop: 15, paddingBottom: 30, borderColor: 'white' }}>
+				<Text style={styles.title}>{item.title}</Text>
+				<View style={[styles.info, { width: screenWidth * 0.9 }]}>
+					<Text style={styles.normalText}>{item.description}</Text>
+				</View>
+
+				<View style={styles.dateTime}>
+					<View style={styles.info}>
+						<Text style={styles.boldText}>{item.date}</Text>
+					</View>
+
+					<View style={styles.info}>
+						<Text style={styles.boldText}>{item.time}</Text>
+					</View>
+				</View>
+				<View style={[styles.info, { width: screenWidth * 0.9 }]}>
+					<Text style={styles.normalText}>at {item.location}</Text>
+				</View>
+				<TouchableOpacity onPress={() => navigation.navigate('Match', { params: { theme: theme, event: item.id } })}>
+					<Text style={styles.match}> Match Now!</Text>
+				</TouchableOpacity>
+			</View>
 		</View>
 	);
 }
@@ -102,6 +93,14 @@ function useTheme() {
 			textAlign: 'center',
 			marginLeft: 10,
 		},
+		match: {
+			fontSize: 25,
+			color: 'white',
+			textAlign: 'center',
+			marginTop: 50,
+			borderColor: 'white',
+			borderWidth: 2,
+		},
 		scroll: {
 			backgroundColor: 'black',
 			paddingBottom: screenHeight * 0.1,
@@ -119,4 +118,4 @@ function useTheme() {
 	return styles;
 }
 
-export default EventPage;
+export default EventDetails;
