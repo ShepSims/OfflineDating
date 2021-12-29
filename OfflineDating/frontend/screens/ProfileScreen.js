@@ -1,8 +1,10 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { TextInput, View, StyleSheet, Dimensions, FlatList, TouchableOpacity, Text, ImageBackground, RefreshControl } from 'react-native';
-import { useNavigation, useRoute } from '@react-navigation/native';
+import { useFocusEffect, useNavigation, useRoute } from '@react-navigation/native';
 import MatchSquare from '../components/MatchSquare';
 import * as ImagePicker from 'expo-image-picker';
+import { useDispatch, useSelector } from 'react-redux';
+import { storeCurrentUser } from '../../store/actions/currentUserActions';
 
 /**
  * @param *
@@ -15,18 +17,26 @@ const firstName = 'Shep';
 const lastName = 'Sims';
 
 function ProfileScreen() {
-	const [profilePic, setProfilePic] = useState({ uri: 'https://www.dmarge.com/wp-content/uploads/2021/01/dwayne-the-rock-.jpg' });
+	const dispatch = useDispatch();
+	const currentUser = useSelector((state) => state.currentUser);
+	const [profilePic, setProfilePic] = useState({ uri: currentUser.profilePic });
 
-	const [instagram, setInstagram] = useState('@shep_sims');
-	const [phone, setPhone] = useState('3049821999');
-	const [name, setName] = useState('Shep Sims');
+	const [instagram, setInstagram] = useState(currentUser.instagram);
+	const [phone, setPhone] = useState(currentUser.phone);
+	const [name, setName] = useState(currentUser.name);
 	const [saved, setSaved] = useState(true);
 
 	const navigation = useNavigation();
 
 	useEffect(() => {
 		setSaved(false);
-	}, [name, phone, instagram]);
+	}, [name, phone, instagram, profilePic]);
+
+	useFocusEffect(
+		useCallback(() => {
+			setSaved(true);
+		}, [])
+	);
 
 	// Theme
 	const styles = useTheme();
@@ -36,7 +46,6 @@ function ProfileScreen() {
 			let response = await ImagePicker.launchImageLibraryAsync({
 				allowsEditing: true,
 			});
-
 			setProfilePic(response);
 			return null;
 		} catch (error) {
@@ -52,6 +61,10 @@ function ProfileScreen() {
 					style={styles.save}
 					onPress={() => {
 						setSaved(true);
+						let u = { ...currentUser };
+						u.profilePic = profilePic.uri;
+						u.name = console.log(u);
+						dispatch(storeCurrentUser(u));
 					}}
 				>
 					Save
