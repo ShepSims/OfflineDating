@@ -17,6 +17,7 @@ import Matches from './frontend/screens/Matches';
 import ProfileScreen from './frontend/screens/ProfileScreen';
 import Events from './frontend/screens/EventPage';
 import EventDetails from './frontend/screens/EventDetails';
+import CreateEvent from './frontend/screens/CreateEvent';
 
 import { midnight } from './assets/themes';
 import { useSelector } from 'react-redux';
@@ -120,6 +121,14 @@ function CustomDrawerContent({ navigation, styles, theme }) {
 
 			<DrawerItem
 				inactiveBackgroundColor={'black'}
+				styles={{ backgroundColor: 'black' }}
+				label={'Create Event'}
+				labelStyle={styles.drawerItem}
+				onPress={() => navigation.navigate('CreateEvent')}
+			/>
+
+			<DrawerItem
+				inactiveBackgroundColor={'black'}
 				label={'Logout'}
 				labelStyle={styles.drawerItem}
 				onPress={() => {
@@ -149,6 +158,7 @@ const MenuScreens = ({ styles, theme }) => (
 		<Menu.Screen theme={theme} name={'Match'} params={{ theme: theme }} component={Match} options={{ gestureEnabled: true }} />
 		<Menu.Screen theme={theme} name={'Matches'} params={{ theme: theme }} component={Matches} options={{ gestureEnabled: true }} />
 		<Menu.Screen theme={theme} name={'Profile'} params={{ theme: theme }} component={ProfileScreen} options={{ gestureEnabled: true }} />
+		<Menu.Screen theme={theme} name={'CreateEvent'} params={{ theme: theme }} component={CreateEvent} options={{ gestureEnabled: true }} />
 	</Menu.Navigator>
 );
 const App = () => {

@@ -12,6 +12,7 @@ function EventPage() {
 	// Navigation
 	const navigation = useNavigation();
 	const events = useSelector((state) => state.events);
+	const currentUser = useSelector((state) => state.currentUser);
 
 	// Theme
 	const theme = midnight;
@@ -62,12 +63,23 @@ function EventPage() {
 				showsHorizontalScrollIndicator={false}
 				showsVerticalScrollIndicator={false}
 			/>
+			{currentUser.role == 'owner' && (
+				<Text style={styles.addEvent} onPress={() => navigation.navigate('CreateEvent')}>
+					Add Event
+				</Text>
+			)}
 		</View>
 	);
 }
 
 function useTheme() {
 	const styles = StyleSheet.create({
+		addEvent: {
+			fontSize: 17,
+			color: 'white',
+			textAlign: 'center',
+			padding: 20,
+		},
 		container: {
 			flex: 1,
 			justifyContent: 'flex-start',
