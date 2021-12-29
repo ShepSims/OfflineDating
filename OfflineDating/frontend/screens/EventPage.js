@@ -24,7 +24,7 @@ function EventPage() {
 
 	const renderEvent = ({ item }) => (
 		<View style={{ borderColor: 'white', borderWidth: 2, margin: 10 }}>
-			<TouchableOpacity onPress={() => navigation.navigate('EventDetails', { theme: theme, id: item.id })}>
+			<TouchableOpacity onPress={() => navigation.navigate('Event Details', { theme: theme, id: item.id })}>
 				<Image source={{ uri: item.coverPhoto }} style={styles.img} />
 				<View style={{ paddingTop: 15, paddingBottom: 30, borderColor: 'white' }}>
 					<Text style={styles.title}>{item.title}</Text>

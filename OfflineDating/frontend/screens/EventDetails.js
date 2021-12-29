@@ -33,7 +33,7 @@ function EventDetails() {
 			<Image source={{ uri: item.coverPhoto }} style={styles.img} />
 			<View style={{ paddingTop: 15, paddingBottom: 30, borderColor: 'white' }}>
 				<Text style={styles.title}>{item.title}</Text>
-				<View style={[styles.info, { width: screenWidth * 0.9 }]}>
+				<View style={[styles.info, { width: screenWidth }]}>
 					<Text style={styles.normalText}>{item.description}</Text>
 				</View>
 
@@ -49,7 +49,7 @@ function EventDetails() {
 				<View style={[styles.info, { width: screenWidth * 0.9 }]}>
 					<Text style={styles.normalText}>at {item.location}</Text>
 				</View>
-				<TouchableOpacity onPress={() => navigation.navigate('Match', { params: { theme: theme, event: item.id } })}>
+				<TouchableOpacity onPress={() => navigation.navigate('Match', { theme: theme, eventID: item.id })}>
 					<Text style={styles.match}> Match Now!</Text>
 				</TouchableOpacity>
 			</View>
@@ -79,6 +79,7 @@ function useTheme() {
 			fontWeight: 'bold',
 			flexDirection: 'row',
 			alignItems: 'center',
+			padding: 15,
 		},
 		boldText: {
 			fontWeight: 'bold',

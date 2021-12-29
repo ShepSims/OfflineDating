@@ -9,6 +9,7 @@ const initialState = {
 		date: moment(new Date(Date.now())).format('MMM Do, YYYY'),
 		time: moment(new Date(Date.now())).format('hh:mm A'),
 		location: 'PB Gym',
+		attendees: [1, 2, 3],
 		coverPhoto:
 			'https://kajabi-storefronts-production.global.ssl.fastly.net/kajabi-storefronts-production/blogs/3762/images/DUDfOeTOqk6vh7L84WGw_group_fitness.jpg',
 	},
@@ -20,6 +21,7 @@ const initialState = {
 		date: moment(new Date(Date.now() + 1000000000)).format('MMM Do, YYYY'),
 		time: moment(new Date(Date.now() + 1000000000)).format('hh:mm A'),
 		location: 'Mt. Pringle',
+		attendees: [3, 4, 5],
 		coverPhoto:
 			'https://images.prismic.io/weekendsherpa/YWNmODdhZDctOTU3My00NzQwLWE0MzYtZjk0ZDQwZWVmMWRi_-?auto=compress%2Cformat&rect=0%2C0%2C5184%2C3456&w=1080&h=1080&fit=crop',
 	},
@@ -31,6 +33,7 @@ const initialState = {
 		date: moment(new Date(Date.now() + 2000000000)).format('MMM Do, YYYY'),
 		time: moment(new Date(Date.now() + 1500000000)).format('hh:mm A'),
 		location: 'Sunset Cliffs',
+		attendees: [6, 7, 8],
 		coverPhoto:
 			'https://ctl.s6img.com/society6/img/VCWHgf6VAZKK_DNDilS4rDth-AA/w_700/prints/~artwork/s6-original-art-uploads/society6/uploads/misc/dfde97d205904017b08f266b793d697c/~~/vintage-beach-party-1-prints.jpg?wait=0&attempt=0',
 	},

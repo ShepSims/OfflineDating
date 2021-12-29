@@ -145,7 +145,7 @@ const MenuScreens = ({ styles, theme }) => (
 		drawerContent={(props) => <CustomDrawerContent {...props} styles={styles} theme={theme} />}
 	>
 		<Menu.Screen theme={theme} name={'Events'} params={{ theme: theme }} component={Events} options={{ gestureEnabled: true }} />
-		<Menu.Screen theme={theme} name={'EventDetails'} params={{ theme: theme }} component={EventDetails} />
+		<Menu.Screen theme={theme} name={'Event Details'} params={{ theme: theme }} component={EventDetails} options={{ gestureEnabled: true }} />
 		<Menu.Screen theme={theme} name={'Match'} params={{ theme: theme }} component={Match} options={{ gestureEnabled: true }} />
 		<Menu.Screen theme={theme} name={'Matches'} params={{ theme: theme }} component={Matches} options={{ gestureEnabled: true }} />
 		<Menu.Screen theme={theme} name={'Profile'} params={{ theme: theme }} component={ProfileScreen} options={{ gestureEnabled: true }} />
