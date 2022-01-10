@@ -15,6 +15,7 @@ type User @model {
 	receivedMatchRequests: [Match] @connection(keyName: "matchRequestee", fields: ["id"])
 	blockedUsers: [Block] @connection(keyName: "blocker", fields: ["id"])
 	blockedByUsers: [Block] @connection(keyName: "blockedUser", fields: ["id"])
+	joinedEvents: [EventUser] @connection(keyName: "byEventUser", fields: ["id"])
 }
 
 type ChatRoomUser @model @key(name: "byUser", fields: ["userID", "chatRoomID"]) @key(name: "byChatRoom", fields: ["chatRoomID", "userID"]) {
@@ -68,6 +69,31 @@ type Match
 	requester: User! @connection(fields: ["requesterID"])
 	requestee: User! @connection(fields: ["requesteeID"])
 	status: String!
+}
+
+type Event @model(queries: null) @key(name: "createdBy", fields: ["createdByID"]) {
+	id: ID!
+	createdByID: ID!
+	createdByUser: User! @connection(fields: ["createdByID"])
+	status: String!
+	timeOfEvent: String!
+	location: String!
+	description: String!
+	coverPhoto: String!
+	title: String!
+	eventUsers: [EventUser] @connection(keyName: "byEvent", fields: ["id"])
+}
+
+type EventUser
+	@model(queries: null)
+	@key(name: "byEvent", fields: ["eventID", "userID", "status"])
+	@key(name: "byEventUser", fields: ["userID", "eventID", "status"]) {
+	status: String!
+	id: ID!
+	eventID: ID!
+	userID: ID!
+	event: Event! @connection(fields: ["eventID"])
+	user: User! @connection(fields: ["userID"])
 }
 
 type Block
